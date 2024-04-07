@@ -7,7 +7,7 @@
 
 import UIKit
 import RxSwift
-class CompareSearchCell: UITableViewCell {
+final class CompareSearchCell: UITableViewCell {
 
     static let identifier = "CompareCell"
     static let cellHeight: CGFloat = 50

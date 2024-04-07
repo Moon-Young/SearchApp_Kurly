@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-class GitHubSearchAPIRepository {
+final class GitHubSearchAPIRepository {
     
     static let shared = GitHubSearchAPIRepository()
     private init() {}

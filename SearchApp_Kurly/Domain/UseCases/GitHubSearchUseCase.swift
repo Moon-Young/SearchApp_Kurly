@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-class GitHubSearchUseCase {
+final class GitHubSearchUseCase {
     
     let disposeBag = DisposeBag()
     

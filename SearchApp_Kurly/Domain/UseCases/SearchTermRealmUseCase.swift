@@ -12,7 +12,7 @@ import RxRelay
 import RxSwift
 import RxCocoa
 
-class SearchTermRealmUseCase {
+final class SearchTermRealmUseCase {
     
     private var realmDB: Realm!
     

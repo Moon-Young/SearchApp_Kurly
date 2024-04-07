@@ -13,7 +13,7 @@ import Then
 import SnapKit
 import Kingfisher
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     
     let viewModel = SearchViewModel()
     let disposeBag = DisposeBag()

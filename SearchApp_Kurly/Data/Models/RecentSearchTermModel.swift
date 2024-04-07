@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class RecentSearchTermModel: Object {
+final class RecentSearchTermModel: Object {
     @objc dynamic var searchTerm: String?
     @objc dynamic var insertDate: Date?
     @objc dynamic var termUUID: UUID?

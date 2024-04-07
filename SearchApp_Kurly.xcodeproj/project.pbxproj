@@ -10,6 +10,7 @@
 		09A90145B10EE82D31B931E3 /* Pods_SearchApp_Kurly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E06F93ADAD1297425748888 /* Pods_SearchApp_Kurly.framework */; };
 		2175D8C6D40DB6468A4AE6AA /* Pods_SearchApp_Kurly_SearchApp_KurlyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9E5D832650EB9F94E6E3C7 /* Pods_SearchApp_Kurly_SearchApp_KurlyUITests.framework */; };
 		2434219EA313724E9611C4CA /* Pods_SearchApp_KurlyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2710758E3019A5C34D6F35FE /* Pods_SearchApp_KurlyTests.framework */; };
+		5C7C6EB02BC2847A00B35A6B /* ReuseIndicationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C6EAF2BC2847A00B35A6B /* ReuseIndicationCell.swift */; };
 		5CA3253B2BC1D03000494156 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3253A2BC1D03000494156 /* AppDelegate.swift */; };
 		5CA3253D2BC1D03000494156 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3253C2BC1D03000494156 /* SceneDelegate.swift */; };
 		5CA3253F2BC1D03000494156 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3253E2BC1D03000494156 /* SearchViewController.swift */; };
@@ -60,6 +61,7 @@
 		2AA7A32F8D6F156BC3F36688 /* Pods-SearchApp_KurlyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchApp_KurlyTests.debug.xcconfig"; path = "Target Support Files/Pods-SearchApp_KurlyTests/Pods-SearchApp_KurlyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2E1649E86BA677E57C39F8B4 /* Pods-SearchApp_Kurly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchApp_Kurly.debug.xcconfig"; path = "Target Support Files/Pods-SearchApp_Kurly/Pods-SearchApp_Kurly.debug.xcconfig"; sourceTree = "<group>"; };
 		574304737DE6AA4C066EDBE3 /* Pods-SearchApp_Kurly-SearchApp_KurlyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchApp_Kurly-SearchApp_KurlyUITests.release.xcconfig"; path = "Target Support Files/Pods-SearchApp_Kurly-SearchApp_KurlyUITests/Pods-SearchApp_Kurly-SearchApp_KurlyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5C7C6EAF2BC2847A00B35A6B /* ReuseIndicationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIndicationCell.swift; sourceTree = "<group>"; };
 		5CA325372BC1D03000494156 /* SearchApp_Kurly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchApp_Kurly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CA3253A2BC1D03000494156 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CA3253C2BC1D03000494156 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				5CDBAE892BC259B60099E31D /* ResultSearchCell.swift */,
+				5C7C6EAF2BC2847A00B35A6B /* ReuseIndicationCell.swift */,
 			);
 			path = ResultSearchCell;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				5CDBAE8E2BC25EAE0099E31D /* GitHubSearchAPIRepository.swift in Sources */,
 				5CDACCE52BC2386900A11F19 /* RecentSearchFooterViewCell.swift in Sources */,
 				5CDBAEA12BC281DD0099E31D /* UITableView+Extension.swift in Sources */,
+				5C7C6EB02BC2847A00B35A6B /* ReuseIndicationCell.swift in Sources */,
 				5CDBAE952BC25F550099E31D /* GitHubSearchUseCase.swift in Sources */,
 				5CDACCE72BC23FED00A11F19 /* RecentSearchHeaderViewCell.swift in Sources */,
 				5CDACCDC2BC1F04F00A11F19 /* RecentSearchTermModel.swift in Sources */,
