@@ -6,35 +6,262 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxRelay
+import Then
+import SnapKit
+import Kingfisher
 
 class SearchViewController: UIViewController {
-
+    
+    let viewModel = SearchViewModel()
+    let disposeBag = DisposeBag()
+    
+    private let recentTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.isHidden = false
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.isScrollEnabled = true
+        return tableView
+    }()
+    private let compareTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.isHidden = true
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.isScrollEnabled = true
+        return tableView
+    }()
+    private let resultTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.isHidden = true
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.isScrollEnabled = true
+        return tableView
+    }()
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "저장소 검색"
+        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
+        searchController.searchBar.tintColor = UIColor(named: "main_color")
+        searchController.hidesNavigationBarDuringPresentation = true
+        return searchController
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        setupDelegate()
         setupLayout()
         setupViews()
         setupTableView()
         
-    }
-
-    
-    
-    
-    func bindViewModel() {
+        // MARK: Bind Realm Observable
+        self.viewModel.recentSearchTermRealm
+            .bind(to: self.recentTableView.rx.items(cellIdentifier: RecentSearchCell.identifier, cellType: RecentSearchCell.self)) { tv, tvItem, cell in
+                cell.recentSearchTermLabel.text = tvItem.searchTerm
+                cell.recentSearchTermDeleteButton.rx.tap
+                    .subscribe { [weak self] _ in
+                        self?.viewModel.deleteSingleSearchTermRealmUseCase(singleTerm: tvItem)
+                    }.disposed(by: cell.disposeBag)
+                
+            }.disposed(by: disposeBag)
+        
+        // MARK: Bind Compare Observable
+        self.searchController.searchBar.rx.text.orEmpty
+            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe { [weak self] tuple in
+                guard let self = self else { return }
+                let (vc, termKeyword) = tuple
+                let filteredSearchTerms = viewModel.recentSearchTermRealm.value.filter {
+                    $0.searchTerm?.contains(termKeyword) ?? false
+                }
+                print(filteredSearchTerms)
+                viewModel.recentSearchTermCompare.accept(filteredSearchTerms)
+            }.disposed(by: disposeBag)
+        
+        self.viewModel.recentSearchTermCompare
+            .bind(to: self.compareTableView.rx.items(cellIdentifier: CompareCell.identifier, cellType: CompareCell.self)) { tv, tvItem, cell in
+                cell.recentSearchTermLabel.text = tvItem.searchTerm
+                
+                // TODO: Commom
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM.dd." // 2020-08-13 16:30
+                let str = dateFormatter.string(from: tvItem.insertDate!)
+                cell.recentSearchInsertDateLabel.text = str
+            }.disposed(by: disposeBag)
         
     }
-    func setupLayout() {
-
+    
+    private func bindViewModel() {
+        self.viewModel.getSearchTermRealmUseCase()
     }
-    func setupViews() {
+    private func setupDelegate() {
+        self.searchController.delegate = self
+        self.searchController.searchBar.delegate = self
+        
+        self.recentTableView.delegate = self
+        self.compareTableView.delegate = self
+        self.resultTableView.delegate = self
+    }
+    private func setupLayout() {
+        self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.title = "Search"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    private func setupViews() {
         self.view.backgroundColor = .white
+        self.view.addSubview(self.recentTableView)
+        self.view.addSubview(self.compareTableView)
+        self.view.addSubview(self.resultTableView)
     }
-    func setupTableView() {
+    private func setupTableView() {
+        
+        self.recentTableView.register(RecentSearchCell.self, forCellReuseIdentifier: RecentSearchCell.identifier)
+        self.recentTableView.register(RecentSearchFooterViewCell.self, forHeaderFooterViewReuseIdentifier: RecentSearchFooterViewCell.identifier)
+        self.recentTableView.register(RecentSearchHeaderViewCell.self, forHeaderFooterViewReuseIdentifier: RecentSearchHeaderViewCell.identifier)
+        
+        self.compareTableView.register(CompareCell.self, forCellReuseIdentifier: CompareCell.identifier)
+        
+        
+        self.recentTableView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        self.compareTableView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        self.resultTableView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
         
     }
     
-
+    
 }
 
+// MARK: - Search Controller
+extension SearchViewController {
+    @objc func deleteAllRealmData() {
+        self.viewModel.deleteAllSearchTermRealmUseCase()
+    }
+    // MARK: Empty TableView Control
+    // TODO:
+    func controlTableView(table: Int) {
+        if table == 1 {
+            DispatchQueue.main.async {
+                self.recentTableView.isHidden = false
+                self.compareTableView.isHidden = true
+                self.resultTableView.isHidden = true
+            }
+        } else if table == 2 {
+            DispatchQueue.main.async {
+                self.recentTableView.isHidden = true
+                self.compareTableView.isHidden = false
+                self.resultTableView.isHidden = true
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.recentTableView.isHidden = true
+                self.compareTableView.isHidden = true
+                self.resultTableView.isHidden = false
+            }
+        }
+    }
+}
+
+// MARK: UISearchControllerDelegate
+extension SearchViewController: UISearchControllerDelegate {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        self.controlTableView(table: 1)
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        self.controlTableView(table: 2)
+        return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else {
+            return
+        }
+        print(#function,searchText)
+        viewModel.addSearchTermRealmUseCase(keyword: searchText)
+        controlTableView(table: 3)
+        
+    }
+}
+
+// MARK: UITableViewDelegate
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView == recentTableView {
+            return RecentSearchCell.cellHeight
+        } else if tableView == compareTableView {
+            return CompareCell.cellHeight
+        } else {
+//          return ResultCell.cellHeight
+        }
+        return 0
+    }
+    
+    // MARK: Header
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if tableView == recentTableView {
+            let cell = self.recentTableView.dequeueReusableHeaderFooterView(withIdentifier: RecentSearchHeaderViewCell.identifier) as! RecentSearchHeaderViewCell
+            cell.headerTextLabel.text = "최근 검색"
+            return cell
+        } else if tableView == compareTableView {
+            return nil
+        } else {
+            let cell = self.recentTableView.dequeueReusableHeaderFooterView(withIdentifier: RecentSearchHeaderViewCell.identifier) as! RecentSearchHeaderViewCell
+            cell.headerTextLabel.text = "123,456"
+            return cell
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == recentTableView {
+            return RecentSearchHeaderViewCell.cellHeight
+        } else if tableView == compareTableView {
+            return 0
+        } else {
+            return RecentSearchHeaderViewCell.cellHeight
+        }
+    }
+    // MARK: Footer
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+
+        if tableView == recentTableView {
+            let cell = self.recentTableView.dequeueReusableHeaderFooterView(withIdentifier: RecentSearchFooterViewCell.identifier) as! RecentSearchFooterViewCell
+            cell.recentSearchTermAllDeleteButton.addTarget(self, action: #selector(deleteAllRealmData), for: .touchUpInside)
+            return cell
+        } else if tableView == compareTableView {
+            return nil
+        } else {
+            return nil
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if tableView == recentTableView {
+            return RecentSearchFooterViewCell.cellHeight
+        } else if tableView == compareTableView {
+            return 0
+        } else {
+            return 0
+        }
+    }
+}
 

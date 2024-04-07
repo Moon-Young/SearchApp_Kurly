@@ -18,12 +18,20 @@
 		5CDACCBA2BC1D95B00A11F19 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCB92BC1D95B00A11F19 /* Kingfisher */; };
 		5CDACCBD2BC1D96500A11F19 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCBC2BC1D96500A11F19 /* SnapKit */; };
 		5CDACCC02BC1D96E00A11F19 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCBF2BC1D96E00A11F19 /* Then */; };
-		5CDACCC32BC1D97D00A11F19 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCC22BC1D97D00A11F19 /* RxCocoa */; };
-		5CDACCC52BC1D97D00A11F19 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCC42BC1D97D00A11F19 /* RxRelay */; };
-		5CDACCC72BC1D97D00A11F19 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCC62BC1D97D00A11F19 /* RxSwift */; };
-		5CDACCC92BC1D97D00A11F19 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCC82BC1D97D00A11F19 /* RxTest */; };
 		5CDACCCC2BC1D99800A11F19 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCCB2BC1D99800A11F19 /* Realm */; };
 		5CDACCCE2BC1D99800A11F19 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCCD2BC1D99800A11F19 /* RealmSwift */; };
+		5CDACCD12BC1DCB800A11F19 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCD02BC1DCB800A11F19 /* RxCocoa */; };
+		5CDACCD32BC1DCB800A11F19 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCD22BC1DCB800A11F19 /* RxRelay */; };
+		5CDACCD52BC1DCB800A11F19 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CDACCD42BC1DCB800A11F19 /* RxSwift */; };
+		5CDACCD72BC1DCD100A11F19 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CDACCD62BC1DCD100A11F19 /* Colors.xcassets */; };
+		5CDACCD92BC1E22B00A11F19 /* RecentSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDACCD82BC1E22B00A11F19 /* RecentSearchCell.swift */; };
+		5CDACCDC2BC1F04F00A11F19 /* RecentSearchTermModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDACCDB2BC1F04F00A11F19 /* RecentSearchTermModel.swift */; };
+		5CDACCDE2BC1F05500A11F19 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDACCDD2BC1F05500A11F19 /* Repository.swift */; };
+		5CDACCE12BC1F0A800A11F19 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDACCE02BC1F0A800A11F19 /* SearchViewModel.swift */; };
+		5CDACCE32BC1F19800A11F19 /* SearchTermRealmUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDACCE22BC1F19800A11F19 /* SearchTermRealmUseCase.swift */; };
+		5CDACCE52BC2386900A11F19 /* RecentSearchFooterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDACCE42BC2386900A11F19 /* RecentSearchFooterViewCell.swift */; };
+		5CDACCE72BC23FED00A11F19 /* RecentSearchHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDACCE62BC23FED00A11F19 /* RecentSearchHeaderViewCell.swift */; };
+		5CDACCEB2BC243B200A11F19 /* CompareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDACCEA2BC243B200A11F19 /* CompareCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +64,15 @@
 		5CA325572BC1D03100494156 /* SearchApp_KurlyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SearchApp_KurlyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CA3255B2BC1D03100494156 /* SearchApp_KurlyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApp_KurlyUITests.swift; sourceTree = "<group>"; };
 		5CA3255D2BC1D03100494156 /* SearchApp_KurlyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApp_KurlyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5CDACCD62BC1DCD100A11F19 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		5CDACCD82BC1E22B00A11F19 /* RecentSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCell.swift; sourceTree = "<group>"; };
+		5CDACCDB2BC1F04F00A11F19 /* RecentSearchTermModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentSearchTermModel.swift; sourceTree = "<group>"; };
+		5CDACCDD2BC1F05500A11F19 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		5CDACCE02BC1F0A800A11F19 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		5CDACCE22BC1F19800A11F19 /* SearchTermRealmUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTermRealmUseCase.swift; sourceTree = "<group>"; };
+		5CDACCE42BC2386900A11F19 /* RecentSearchFooterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchFooterViewCell.swift; sourceTree = "<group>"; };
+		5CDACCE62BC23FED00A11F19 /* RecentSearchHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchHeaderViewCell.swift; sourceTree = "<group>"; };
+		5CDACCEA2BC243B200A11F19 /* CompareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,14 +80,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CDACCC92BC1D97D00A11F19 /* RxTest in Frameworks */,
-				5CDACCC72BC1D97D00A11F19 /* RxSwift in Frameworks */,
-				5CDACCC52BC1D97D00A11F19 /* RxRelay in Frameworks */,
+				5CDACCD12BC1DCB800A11F19 /* RxCocoa in Frameworks */,
 				5CDACCCE2BC1D99800A11F19 /* RealmSwift in Frameworks */,
+				5CDACCD32BC1DCB800A11F19 /* RxRelay in Frameworks */,
 				5CDACCBA2BC1D95B00A11F19 /* Kingfisher in Frameworks */,
 				5CDACCC02BC1D96E00A11F19 /* Then in Frameworks */,
-				5CDACCC32BC1D97D00A11F19 /* RxCocoa in Frameworks */,
 				5CDACCCC2BC1D99800A11F19 /* Realm in Frameworks */,
+				5CDACCD52BC1DCB800A11F19 /* RxSwift in Frameworks */,
 				5CDACCBD2BC1D96500A11F19 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +161,7 @@
 		5CDACCAE2BC1D80F00A11F19 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5CDACCD62BC1DCD100A11F19 /* Colors.xcassets */,
 				5CA325432BC1D03100494156 /* Assets.xcassets */,
 				5CA325452BC1D03100494156 /* LaunchScreen.storyboard */,
 				5CA325482BC1D03100494156 /* Info.plist */,
@@ -156,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				5CA3253E2BC1D03000494156 /* SearchViewController.swift */,
+				5CDACCE92BC2439800A11F19 /* CompareCell */,
+				5CDACCE82BC2433D00A11F19 /* RecentCell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,6 +191,7 @@
 		5CDACCB12BC1D89B00A11F19 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				5CDACCDF2BC1F09700A11F19 /* VIewModels */,
 				5CDACCAF2BC1D88300A11F19 /* Views */,
 			);
 			path = Presentation;
@@ -181,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				5CDACCB42BC1D8CE00A11F19 /* Entities */,
+				5CDACCB62BC1D8E500A11F19 /* Repositories */,
 				5CDACCB52BC1D8D800A11F19 /* UseCases */,
 			);
 			path = Domain;
@@ -189,7 +210,7 @@
 		5CDACCB32BC1D8C500A11F19 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				5CDACCB62BC1D8E500A11F19 /* Repositories */,
+				5CDACCDA2BC1F02100A11F19 /* Models */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -204,6 +225,7 @@
 		5CDACCB52BC1D8D800A11F19 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				5CDACCE22BC1F19800A11F19 /* SearchTermRealmUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -220,6 +242,41 @@
 			children = (
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		5CDACCDA2BC1F02100A11F19 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5CDACCDB2BC1F04F00A11F19 /* RecentSearchTermModel.swift */,
+				5CDACCDD2BC1F05500A11F19 /* Repository.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5CDACCDF2BC1F09700A11F19 /* VIewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5CDACCE02BC1F0A800A11F19 /* SearchViewModel.swift */,
+			);
+			path = VIewModels;
+			sourceTree = "<group>";
+		};
+		5CDACCE82BC2433D00A11F19 /* RecentCell */ = {
+			isa = PBXGroup;
+			children = (
+				5CDACCD82BC1E22B00A11F19 /* RecentSearchCell.swift */,
+				5CDACCE62BC23FED00A11F19 /* RecentSearchHeaderViewCell.swift */,
+				5CDACCE42BC2386900A11F19 /* RecentSearchFooterViewCell.swift */,
+			);
+			path = RecentCell;
+			sourceTree = "<group>";
+		};
+		5CDACCE92BC2439800A11F19 /* CompareCell */ = {
+			isa = PBXGroup;
+			children = (
+				5CDACCEA2BC243B200A11F19 /* CompareCell.swift */,
+			);
+			path = CompareCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,12 +299,11 @@
 				5CDACCB92BC1D95B00A11F19 /* Kingfisher */,
 				5CDACCBC2BC1D96500A11F19 /* SnapKit */,
 				5CDACCBF2BC1D96E00A11F19 /* Then */,
-				5CDACCC22BC1D97D00A11F19 /* RxCocoa */,
-				5CDACCC42BC1D97D00A11F19 /* RxRelay */,
-				5CDACCC62BC1D97D00A11F19 /* RxSwift */,
-				5CDACCC82BC1D97D00A11F19 /* RxTest */,
 				5CDACCCB2BC1D99800A11F19 /* Realm */,
 				5CDACCCD2BC1D99800A11F19 /* RealmSwift */,
+				5CDACCD02BC1DCB800A11F19 /* RxCocoa */,
+				5CDACCD22BC1DCB800A11F19 /* RxRelay */,
+				5CDACCD42BC1DCB800A11F19 /* RxSwift */,
 			);
 			productName = SearchApp_Kurly;
 			productReference = 5CA325372BC1D03000494156 /* SearchApp_Kurly.app */;
@@ -325,8 +381,8 @@
 				5CDACCB82BC1D95B00A11F19 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				5CDACCBB2BC1D96500A11F19 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				5CDACCBE2BC1D96E00A11F19 /* XCRemoteSwiftPackageReference "Then" */,
-				5CDACCC12BC1D97D00A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				5CDACCCA2BC1D99800A11F19 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				5CDACCCF2BC1DCB800A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 5CA325382BC1D03000494156 /* Products */;
 			projectDirPath = "";
@@ -346,6 +402,7 @@
 			files = (
 				5CA325442BC1D03100494156 /* Assets.xcassets in Resources */,
 				5CA325472BC1D03100494156 /* Base in Resources */,
+				5CDACCD72BC1DCD100A11F19 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,9 +427,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CDACCD92BC1E22B00A11F19 /* RecentSearchCell.swift in Sources */,
+				5CDACCE12BC1F0A800A11F19 /* SearchViewModel.swift in Sources */,
 				5CA3253F2BC1D03000494156 /* SearchViewController.swift in Sources */,
 				5CA3253B2BC1D03000494156 /* AppDelegate.swift in Sources */,
 				5CA3253D2BC1D03000494156 /* SceneDelegate.swift in Sources */,
+				5CDACCE52BC2386900A11F19 /* RecentSearchFooterViewCell.swift in Sources */,
+				5CDACCE72BC23FED00A11F19 /* RecentSearchHeaderViewCell.swift in Sources */,
+				5CDACCDC2BC1F04F00A11F19 /* RecentSearchTermModel.swift in Sources */,
+				5CDACCDE2BC1F05500A11F19 /* Repository.swift in Sources */,
+				5CDACCEB2BC243B200A11F19 /* CompareCell.swift in Sources */,
+				5CDACCE32BC1F19800A11F19 /* SearchTermRealmUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,20 +810,20 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		5CDACCC12BC1D97D00A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.6.0;
-			};
-		};
 		5CDACCCA2BC1D99800A11F19 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
 				branch = master;
 				kind = branch;
+			};
+		};
+		5CDACCCF2BC1DCB800A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -779,26 +844,6 @@
 			package = 5CDACCBE2BC1D96E00A11F19 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
 		};
-		5CDACCC22BC1D97D00A11F19 /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5CDACCC12BC1D97D00A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		5CDACCC42BC1D97D00A11F19 /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5CDACCC12BC1D97D00A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		5CDACCC62BC1D97D00A11F19 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5CDACCC12BC1D97D00A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		5CDACCC82BC1D97D00A11F19 /* RxTest */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5CDACCC12BC1D97D00A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxTest;
-		};
 		5CDACCCB2BC1D99800A11F19 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5CDACCCA2BC1D99800A11F19 /* XCRemoteSwiftPackageReference "realm-swift" */;
@@ -808,6 +853,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5CDACCCA2BC1D99800A11F19 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		5CDACCD02BC1DCB800A11F19 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CDACCCF2BC1DCB800A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		5CDACCD22BC1DCB800A11F19 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CDACCCF2BC1DCB800A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		5CDACCD42BC1DCB800A11F19 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CDACCCF2BC1DCB800A11F19 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
