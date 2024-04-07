@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecentSearchFooterViewCell: UITableViewHeaderFooterView {
+final class RecentSearchFooterViewCell: UITableViewHeaderFooterView {
     
     static let identifier = "RecentSearchFooterViewCell"
     static let cellHeight: CGFloat = 50
@@ -32,10 +32,8 @@ class RecentSearchFooterViewCell: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        
         setupViews()
         setupLayout()
- 
     }
     
     private func setupViews() {

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-class SearchViewModel {
+final class SearchViewModel {
     
     let disposeBag = DisposeBag()
          

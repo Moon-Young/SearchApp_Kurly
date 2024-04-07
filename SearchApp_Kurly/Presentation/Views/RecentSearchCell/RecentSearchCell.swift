@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 
-class RecentSearchCell: UITableViewCell {
+final class RecentSearchCell: UITableViewCell {
     
     static let identifier = "RecentSearchCell"
     static let cellHeight: CGFloat = 50

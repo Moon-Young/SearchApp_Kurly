@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class ResultSearchCell: UITableViewCell {
+final class ResultSearchCell: UITableViewCell {
 
     static let identifier = "ResultSearchCell"
     static let cellHeight: CGFloat = 70

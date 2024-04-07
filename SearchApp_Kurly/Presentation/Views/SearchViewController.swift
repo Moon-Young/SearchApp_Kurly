@@ -13,7 +13,7 @@ import Then
 import SnapKit
 import Kingfisher
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     
     let viewModel = SearchViewModel()
     let disposeBag = DisposeBag()
@@ -291,7 +291,6 @@ extension SearchViewController: UITableViewDelegate {
     
     // MARK: Header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         if tableView == recentTableView {
             let cell = self.recentTableView.dequeueReusableHeaderFooterView(withIdentifier: RecentSearchHeaderViewCell.identifier) as! RecentSearchHeaderViewCell
             cell.headerTextLabel.text = "최근 검색"
@@ -344,6 +343,19 @@ extension SearchViewController: UITableViewDelegate {
         } else {
             return 0
         }
+    }
+    
+    // MARK: ActivityIndicatorView
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastSectionIndex = resultTableView.numberOfSections - 1
+           let lastRowIndex = resultTableView.numberOfRows(inSection: lastSectionIndex) - 1
+           if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
+               let spinner = UIActivityIndicatorView(style: .gray)
+               spinner.startAnimating()
+               spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: resultTableView.bounds.width, height: CGFloat(44))
+               self.resultTableView.tableFooterView = spinner
+               self.resultTableView.tableFooterView?.isHidden = false
+           }
     }
 }
 

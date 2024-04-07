@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecentSearchHeaderViewCell: UITableViewHeaderFooterView {
+final class RecentSearchHeaderViewCell: UITableViewHeaderFooterView {
     
     static let identifier = "RecentSearchHeaderViewCell"
     static let cellHeight: CGFloat = 30
