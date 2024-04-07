@@ -32,7 +32,6 @@ class SearchTermRealmUseCase {
             self.realmDB.add(term)
             
             if let oldSearchTerm = realmDB.objects(RecentSearchTermModel.self).sorted(byKeyPath: "insertDate", ascending: true).first, realmDB.objects(RecentSearchTermModel.self).count > 10 {
-                print("Completed delete \(oldSearchTerm)")
                 realmDB.delete(oldSearchTerm)
             }
         })

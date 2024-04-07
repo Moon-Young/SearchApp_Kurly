@@ -39,9 +39,6 @@ class RecentSearchFooterViewCell: UITableViewHeaderFooterView {
     }
     
     private func setupViews() {
-        let clearView = UIView()
-        clearView.backgroundColor = UIColor.clear
-        UITableViewCell.appearance().selectedBackgroundView = clearView
         
         self.contentView.addSubview(self.containverView)
         self.containverView.addSubview(self.recentSearchTermAllDeleteButton)

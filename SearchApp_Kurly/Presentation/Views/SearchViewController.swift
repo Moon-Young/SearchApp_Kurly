@@ -62,7 +62,8 @@ class SearchViewController: UIViewController {
         
         // MARK: Bind Realm Observable
         self.viewModel.recentSearchTermRealm
-            .bind(to: self.recentTableView.rx.items(cellIdentifier: RecentSearchCell.identifier, cellType: RecentSearchCell.self)) { tv, tvItem, cell in
+            .bind(to: self.recentTableView.rx.items(cellIdentifier: RecentSearchCell.identifier,
+                                                    cellType: RecentSearchCell.self)) { tv, tvItem, cell in
                 cell.recentSearchTermLabel.text = tvItem.searchTerm
                 cell.recentSearchTermDeleteButton.rx.tap
                     .subscribe { [weak self] _ in
@@ -71,30 +72,99 @@ class SearchViewController: UIViewController {
                 
             }.disposed(by: disposeBag)
         
-        // MARK: Bind Compare Observable
+        // MARK: Bind Compare
         self.searchController.searchBar.rx.text.orEmpty
-            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
+            .debounce(RxTimeInterval.microseconds(5),
+                      scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .withUnretained(self)
             .subscribe { [weak self] tuple in
                 guard let self = self else { return }
-                let (vc, termKeyword) = tuple
+                let (_, termKeyword) = tuple
                 let filteredSearchTerms = viewModel.recentSearchTermRealm.value.filter {
                     $0.searchTerm?.contains(termKeyword) ?? false
                 }
-                print(filteredSearchTerms)
                 viewModel.recentSearchTermCompare.accept(filteredSearchTerms)
             }.disposed(by: disposeBag)
         
+        // MARK: Bind Compare
         self.viewModel.recentSearchTermCompare
-            .bind(to: self.compareTableView.rx.items(cellIdentifier: CompareCell.identifier, cellType: CompareCell.self)) { tv, tvItem, cell in
+            .bind(to: self.compareTableView.rx.items(cellIdentifier: CompareSearchCell.identifier,
+                                                     cellType: CompareSearchCell.self)) { tv, tvItem, cell in
                 cell.recentSearchTermLabel.text = tvItem.searchTerm
-                
                 // TODO: Commom
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MM.dd." // 2020-08-13 16:30
+                dateFormatter.dateFormat = "MM.dd."
                 let str = dateFormatter.string(from: tvItem.insertDate!)
                 cell.recentSearchInsertDateLabel.text = str
+            }.disposed(by: disposeBag)
+        
+        // MARK: Bind API DATA
+        self.viewModel.repositoryResultObservable
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.resultTableView.rx.items(cellIdentifier: ResultSearchCell.identifier,
+                                                    cellType: ResultSearchCell.self)) { tv, tvItem, cell in
+                cell.resultTitleLabel.text = tvItem.name
+                cell.resultDescriptionLabel.text = tvItem.repositoryOwnerResponseDTO.description
+                cell.thumbnailImageView.kf.setImage(with: URL(string: tvItem.repositoryOwnerResponseDTO.thumbnail))
+            }.disposed(by: disposeBag)
+        
+        // MARK: Bind API MORE DATA
+        self.resultTableView.rx.contentOffset
+            .map { offset in
+                return self.resultTableView.isNearToBottomEdge(contentOffset: offset,
+                                                               distance: 800)
+            }.distinctUntilChanged()
+            .subscribe {
+                return self.viewModel.isNearToBottom.accept($0)
+            }.disposed(by: disposeBag)
+        
+        self.viewModel.isNearToBottom
+            .filter { isNear in
+                return isNear
+            }.subscribe {
+                if $0 {
+                    self.viewModel.searchMoreAPI()
+                }
+            }.disposed(by: disposeBag)
+        
+        // MARK: Bind SELECTED recentTableView TABLE VIEW CELL
+        recentTableView.rx.itemSelected
+            .map {
+                return self.viewModel.recentSearchTermRealm.value[$0.row].searchTerm ?? ""
+            }.subscribe {
+                self.viewModel.repositoryResultObservable.accept([])
+                self.resultTableView.reloadData()
+                self.searchController.searchBar.resignFirstResponder()
+                self.searchController.searchBar.text = $0
+                self.viewModel.addSearchTermRealmUseCase(keyword: $0)
+                self.viewModel.searchAPI(keyword: $0)
+                self.controlTableView(table: 3)
+            }
+        
+        // MARK: Bind SELECTED compareTableView TABLE VIEW CELL
+        compareTableView.rx.itemSelected
+            .map {
+                return self.viewModel.recentSearchTermCompare.value[$0.row].searchTerm ?? ""
+            }.subscribe {
+                self.viewModel.repositoryResultObservable.accept([])
+                self.resultTableView.reloadData()
+                self.searchController.searchBar.resignFirstResponder()
+                self.searchController.searchBar.text = $0
+                self.viewModel.addSearchTermRealmUseCase(keyword: $0)
+                self.viewModel.searchAPI(keyword: $0)
+                self.controlTableView(table: 3)
+                
+            }
+        
+        // MARK: Bind SELECTED resultTableView TABLE VIEW CELL
+        resultTableView.rx.itemSelected
+            .map {
+                return self.viewModel.repositoryResultObservable.value[$0.row].repositoryOwnerResponseDTO.url
+            }.subscribe {
+                let webVC = WebViewController()
+                webVC.url = URL(string: $0)
+                self.present(webVC, animated: true)
             }.disposed(by: disposeBag)
         
     }
@@ -125,12 +195,18 @@ class SearchViewController: UIViewController {
     }
     private func setupTableView() {
         
-        self.recentTableView.register(RecentSearchCell.self, forCellReuseIdentifier: RecentSearchCell.identifier)
-        self.recentTableView.register(RecentSearchFooterViewCell.self, forHeaderFooterViewReuseIdentifier: RecentSearchFooterViewCell.identifier)
-        self.recentTableView.register(RecentSearchHeaderViewCell.self, forHeaderFooterViewReuseIdentifier: RecentSearchHeaderViewCell.identifier)
+        self.recentTableView.register(RecentSearchCell.self,
+                                      forCellReuseIdentifier: RecentSearchCell.identifier)
+        self.recentTableView.register(RecentSearchFooterViewCell.self,
+                                      forHeaderFooterViewReuseIdentifier: RecentSearchFooterViewCell.identifier)
+        self.recentTableView.register(RecentSearchHeaderViewCell.self,
+                                      forHeaderFooterViewReuseIdentifier: RecentSearchHeaderViewCell.identifier)
         
-        self.compareTableView.register(CompareCell.self, forCellReuseIdentifier: CompareCell.identifier)
+        self.compareTableView.register(CompareSearchCell.self,
+                                       forCellReuseIdentifier: CompareSearchCell.identifier)
         
+        self.resultTableView.register(ResultSearchCell.self,
+                                      forCellReuseIdentifier: ResultSearchCell.identifier)
         
         self.recentTableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -144,10 +220,7 @@ class SearchViewController: UIViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-        
     }
-    
-    
 }
 
 // MARK: - Search Controller
@@ -160,6 +233,7 @@ extension SearchViewController {
     func controlTableView(table: Int) {
         if table == 1 {
             DispatchQueue.main.async {
+                
                 self.recentTableView.isHidden = false
                 self.compareTableView.isHidden = true
                 self.resultTableView.isHidden = true
@@ -197,10 +271,9 @@ extension SearchViewController: UISearchBarDelegate {
         guard let searchText = searchBar.text else {
             return
         }
-        print(#function,searchText)
-        viewModel.addSearchTermRealmUseCase(keyword: searchText)
-        controlTableView(table: 3)
-        
+        self.viewModel.addSearchTermRealmUseCase(keyword: searchText)
+        self.viewModel.searchAPI(keyword: searchText)
+        self.controlTableView(table: 3)
     }
 }
 
@@ -210,11 +283,10 @@ extension SearchViewController: UITableViewDelegate {
         if tableView == recentTableView {
             return RecentSearchCell.cellHeight
         } else if tableView == compareTableView {
-            return CompareCell.cellHeight
+            return CompareSearchCell.cellHeight
         } else {
-//          return ResultCell.cellHeight
+            return ResultSearchCell.cellHeight
         }
-        return 0
     }
     
     // MARK: Header
@@ -228,7 +300,17 @@ extension SearchViewController: UITableViewDelegate {
             return nil
         } else {
             let cell = self.recentTableView.dequeueReusableHeaderFooterView(withIdentifier: RecentSearchHeaderViewCell.identifier) as! RecentSearchHeaderViewCell
-            cell.headerTextLabel.text = "123,456"
+            
+            // TODO: COMMON
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+            let result = numberFormatter.string(from: NSNumber(value: self.viewModel.repositoryTotalCount.value)) ?? "0"
+            
+            DispatchQueue.main.async {
+                cell.headerTextLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+                cell.headerTextLabel.textColor = UIColor(named: "main_gray_6")
+                cell.headerTextLabel.text = "\(result)개 저장소"
+            }
             return cell
         }
     }
@@ -243,7 +325,7 @@ extension SearchViewController: UITableViewDelegate {
     }
     // MARK: Footer
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-
+        
         if tableView == recentTableView {
             let cell = self.recentTableView.dequeueReusableHeaderFooterView(withIdentifier: RecentSearchFooterViewCell.identifier) as! RecentSearchFooterViewCell
             cell.recentSearchTermAllDeleteButton.addTarget(self, action: #selector(deleteAllRealmData), for: .touchUpInside)

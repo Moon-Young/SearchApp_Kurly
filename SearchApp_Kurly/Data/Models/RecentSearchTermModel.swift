@@ -1,8 +1,8 @@
 //
 //  RecentSearchTermModel.swift
-//  Kurly_UI_1
+//  SearchApp_Kurly
 //
-//  Created by Moonyoung Kim on 3/31/24.
+//  Created by Moonyoung Kim on 4/6/24.
 //
 
 import Foundation
