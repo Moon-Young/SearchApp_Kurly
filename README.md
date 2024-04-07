@@ -65,3 +65,5 @@
 ![Search](https://github.com/Moon-Young/SearchApp_Kurly/assets/29904301/cebe6881-301a-4a40-b33e-9e63f9648c1b)
 ![recentSearchTerm](https://github.com/Moon-Young/SearchApp_Kurly/assets/29904301/4af7b6d3-3723-40ef-a6b2-55332dc6a1ef)
 ![History delete_alldelete](https://github.com/Moon-Young/SearchApp_Kurly/assets/29904301/b1c5a4b4-01c2-4c6b-b7c5-8f15c26b66c8)
+![WebView](https://github.com/Moon-Young/SearchApp_Kurly/assets/29904301/e3b673fc-d0aa-4c92-b811-9309ed2406d3)
+![Simulator Screen Recording - iPhone 15 Pro Max - 2024-04-07 at 18 08 04](https://github.com/Moon-Young/SearchApp_Kurly/assets/29904301/c9fb9dfc-60d2-47b6-bd50-8f8ab6377ab4)
