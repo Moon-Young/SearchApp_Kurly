@@ -10,7 +10,18 @@
 - Data Layer : 백엔드 or 로컬 데이터로부터 데이터를 가져오는 책임을 갖습니다. DTO, Repository
 - Domain Layer : 앱의 비즈니스 로직을 담당합니다. UseCase(Service)
 - Presentaion Layer : UI 로직 관련 책임을 갖습니다. MVVM 패턴을 활용했습니다.
+*****************
+Repository는 서버로 부터 온 Entity를 Service에게 리턴해주는 역할
+- Repository → (Entity) → Service → 
 
+Service는 Entity받아서 **Logic**에서 쓸 수있는 Model로 바꿔주는 역할(**핵심 비즈니스 로직**)
+- (Entity) → Service → (Model) → 
+
+ViewModel은 Model을 받아서 View에서 쓸수 있게 ViewModel로 바꿔주는 역할
+- (Model) → ViewModel → (ViewModel) → View 
+  
+**View는 ViewModel만 바라보면 됨, 가장 중요한건 모든 방향성 일관적**
+  
 ***
 
 ### 사용 라이브러리
