@@ -56,6 +56,8 @@ ViewModel은 Model을 받아서 View에서 쓸수 있게 ViewModel로 바꿔주�
 - [ ]  검색 결과 선택 시, WebView 를 통해 저장소로 이동합니다.
 - [ ]  Scroll 중간에 Next Page를 미리 호출합니다.
 - [ ]  Next Page를 로딩할 때, 로딩 상태를 보여줍니다.
+- https://api.github.com/search/repositories?q={keyword}&page={page} 
+
 ## Data
 ### Entity
 **RepositoryResponseDTO**
