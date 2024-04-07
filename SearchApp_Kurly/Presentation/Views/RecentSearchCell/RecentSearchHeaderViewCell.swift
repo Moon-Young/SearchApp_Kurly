@@ -14,6 +14,7 @@ class RecentSearchHeaderViewCell: UITableViewHeaderFooterView {
     
     let containverView: UIView = {
         let view = UIView()
+        view.backgroundColor = .white
         return view
     }()
     let headerTextLabel: UILabel = {
@@ -26,16 +27,13 @@ class RecentSearchHeaderViewCell: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        
+
         setupViews()
         setupLayout()
         
     }
     
     private func setupViews() {
-        let clearView = UIView()
-        clearView.backgroundColor = UIColor.clear
-        UITableViewCell.appearance().selectedBackgroundView = clearView
         
         self.contentView.addSubview(self.containverView)
         self.containverView.addSubview(self.headerTextLabel)
